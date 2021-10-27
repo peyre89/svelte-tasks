@@ -1,10 +1,29 @@
 <script>
-	export let name;
+	import Tasks from './components/Tasks.svelte';
+
+	const tasks = [
+		{
+			id: 1,
+			name: 'Sleep',
+			completed: false
+		},
+		{
+			id: 2,
+			name: 'Play games',
+			completed: false
+		},
+		{
+			id: 3,
+			name: 'Eat pizza',
+			completed: false
+		}
+	];
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<h1>Tasks!</h1>
+
+	<Tasks tasks={tasks} />
 </main>
 
 <style>
