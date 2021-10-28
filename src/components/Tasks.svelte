@@ -1,5 +1,6 @@
 <script>
 	import Form from './Form.svelte';
+	import Task from './Task.svelte';
 
 	export let tasks = [];
 
@@ -64,11 +65,7 @@
 	<ul>
 		{#each filterTasks(filter, tasks) as task (task.id)}
 			<li>
-				<input type="checkbox" checked={task.completed} on:click={() => toggleCheckbox(task)}>
-
-				{task.name}
-
-				<button on:click={() => deleteTask(task)}>delete</button>
+				<Task {task} {toggleCheckbox} {deleteTask} />
 			</li>
 		{/each}
 	</ul>
