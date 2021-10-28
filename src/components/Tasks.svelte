@@ -1,15 +1,15 @@
 <script>
+	import Form from './Form.svelte';
+
 	export let tasks = [];
 
 	const FILTER_ALL = 'all';
 	const FILTER_ACTIVE = 'active';
 	const FILTER_COMPLETED = 'completed';
 
-	let newTaskName = '';
-
 	$: newTaskId = tasks.length === 0 ? 1 : Math.max(...tasks.map(t => t.id)) + 1;
 
-	const addTask = () => {
+	const addTask = (newTaskName) => {
 		tasks = [
 			...tasks,
 			{
@@ -18,8 +18,6 @@
 				completed: false
 			}
 		];
-
-		newTaskName = '';
 	}
 
 	const deleteTask = task => {
@@ -55,12 +53,7 @@
 </script>
 
 <div>
-	<form on:submit|preventDefault={addTask}>
-		<label for="task">New task?</label>
-		<input id="task" bind:value={newTaskName} />
-
-		<button type="submit">Add</button>
-	</form>
+	<Form {addTask} />
 
 	<div class="filters">
 		<button class:active={filter === FILTER_ALL} on:click={() => filter = FILTER_ALL}>All</button>
@@ -82,14 +75,6 @@
 </div>
 
 <style>
-	form {
-		margin-top: 48px;
-	}
-
-	input {
-		margin-top: 12px;
-	}
-
 	.filters {
 		margin-top: 32px;
 	}
